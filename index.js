@@ -47,6 +47,17 @@ function promptUser() {
                 name: "shapeColor",
             },
         ])
+        .then((answers) => {
+            // make sure the user does not enter more than 3 characters for the logo
+            if (answers.text.length > 3) {
+                console.log("Please enter a text input of no more than 3 characters.");
+                // if user enters more than 3 characters prompt again
+                promptUser();
+            } else {
+                // once prompts are answered, call the function to write the svg file
+                writeToFile("logo.svg", answers);
+            };
+        });   
 }
 
 // WHEN I have entered input for all the prompts
