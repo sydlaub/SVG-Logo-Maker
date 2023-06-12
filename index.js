@@ -25,15 +25,16 @@ function writeToFile(fileName, answers) {
     let shape;
     if (answers.shape === 'Circle') {
         let circleShape = new Circle();
-        svgText += `<circle cx="25" cy="75" r="20" fill="${answers.shapeColor}"/>`;
+        svgText += `<circle cx="150" cy="115" r="80" fill="${answers.shapeColor}"/>`;
     } else if (answers.shape === 'Triangle') {
         let triangleShape = new Triangle();
-        svgText += `<polygon points="200,10 250,200 160,200" fill = ${answers.shapeColor}/>`;
+        svgText += `<polygon points="162.5,20 250,175 75,175" fill = "${answers.shapeColor}"/>`;
     } else {
         let squareShape = new Sqaure();
-        svgText += `<rect x="73" y="40" width="200" height="200" fill = ${answers.shapeColor}/>`; 
+        svgText += `<rect x="73" y="40" width="175" height="175" fill = "${answers.shapeColor}"/>`; 
     }
-
+    // put answers.text within the text tag given from svg and assign the fill of the text answers.textColor
+    svgText += `<text x="150" y="130" text-anchor="middle" font-size="40" fill ="${answers.textColor}">${answers.text}</text>`;
     // add cloding g and svg tags to svg text string
     svgText += "</g>";
     svgText += "</svg>";
