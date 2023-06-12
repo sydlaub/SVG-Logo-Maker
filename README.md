@@ -10,7 +10,9 @@ To clone the repo:
 git clone git@github.com:sydlaub/SVG-Logo-Maker.git
 
 ## Usage
-Link to [walkthrough video]() that demonstrates functionality of the SVG logo maker.
+Link to [walkthrough video](https://drive.google.com/file/d/1V7CAxWGIkYLE3gvuNFbnFapdUP18eg6D/view) that demonstrates functionality of the SVG logo maker.
+
+Screenshots: 
 
 ![Inquirer function example](/examples/images/Inquirer-code-example.png)
 ![Generated logo code](/examples/images/generated-logo-code.png)
