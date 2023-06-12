@@ -1,8 +1,19 @@
 // import inquirer
-const inquirer = reuquire('inquirer');
+const inquirer = require('inquirer');
+
+
 
 // import file system module
 const fs = require('fs');
+
+// import shapes file
+const Shape = require('./lib/shapes');
+
+function generateSVG(shape) {
+    let newShape = shape.render();
+    return `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">${newShape}</svg>`
+    
+}
 
 
 // GIVEN a command - line application that accepts user input
@@ -49,13 +60,19 @@ function promptUser() {
         ])
         .then((answers) => {
             // make sure the user does not enter more than 3 characters for the logo
+            let shape;
+            if(answers.shape = 'Circle'){
+                let circleShape = new Shape.Circle()
+                shape = circleShape;
+            }
             if (answers.text.length > 3) {
                 console.log("Please enter a text input of no more than 3 characters.");
                 // if user enters more than 3 characters prompt again
                 promptUser();
             } else {
                 // once prompts are answered, call the function to write the svg file
-                writeToFile("logo.svg", answers);
+
+                writeToFile("logo.svg", generateSVG(shape));
             };
         });   
 }
