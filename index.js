@@ -29,10 +29,19 @@ function writeToFile(fileName, answers) {
     } else if (answers.shape === 'Triangle') {
         let triangleShape = new Triangle();
         svgText += `<polygon points="200,10 250,200 160,200" fill = ${answers.shapeColor}/>`;
-    } else (answers.shape === 'Square') {
+    } else {
         let squareShape = new Sqaure();
         svgText += `<rect x="73" y="40" width="200" height="200" fill = ${answers.shapeColor}/>`; 
     }
+
+    // add cloding g and svg tags to svg text string
+    svgText += "</g>";
+    svgText += "</svg>";
+
+    // generate the new file using fs module/ error handling
+    fs.writeFile(fileName, svgText, (err) => {
+        err ? console.log(err) : console.log("Logo generated!");
+    });
 
 }
 
@@ -66,7 +75,7 @@ function promptUser() {
             },
             // shape of logo
             {
-                type: "input",
+                type: "list",
                 message: "What shape would you like the logo to display?",
                 choices: ["Triangle", "Square", "Circle"],
                 name: "shape",
@@ -86,8 +95,7 @@ function promptUser() {
                 promptUser();
             } else {
                 // once prompts are answered, call the function to write the svg file
-
-                writeToFile("logo.svg", generateSVG(shape));
+                writeToFile("logo.svg", answers);
             };
         });   
 }
@@ -97,3 +105,5 @@ function promptUser() {
 // AND the output text "Generated logo.svg" is printed in the command line
 // WHEN I open the `logo.svg` file in a browser
 // THEN I am shown a 300x200 pixel image that matches the criteria I entered
+
+promptUser();
