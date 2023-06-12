@@ -6,7 +6,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 
 // import shapes file
-const {Circle, Triangle, Sqaure} = require('./lib/shapes');
+const {Circle, Triangle, Square} = require('./lib/shapes');
 
 // function generateSVG(shape) {
 //     let newShape = shape.render();
@@ -30,7 +30,7 @@ function writeToFile(fileName, answers) {
         let triangleShape = new Triangle();
         svgText += `<polygon points="162.5,20 250,175 75,175" fill = "${answers.shapeColor}"/>`;
     } else {
-        let squareShape = new Sqaure();
+        let squareShape = new Square();
         svgText += `<rect x="73" y="40" width="175" height="175" fill = "${answers.shapeColor}"/>`; 
     }
     // put answers.text within the text tag given from svg and assign the fill of the text answers.textColor
