@@ -2,19 +2,39 @@
 const inquirer = require('inquirer');
 
 
-
 // import file system module
 const fs = require('fs');
 
 // import shapes file
-const Shape = require('./lib/shapes');
+const {Circle, Triangle, Sqaure} = require('./lib/shapes');
 
-function generateSVG(shape) {
-    let newShape = shape.render();
-    return `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">${newShape}</svg>`
+// function generateSVG(shape) {
+//     let newShape = shape.render();
+//     return `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">${newShape}</svg>`
     
-}
+// }
 
+function writeToFile(fileName, answers) {
+    // start with empty string for the text within the svg logo, set the size of the logo, add g tag to ensure the text is in front of the image and then add the users shape
+    let svgText = "";
+    svgText = '<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">';
+    svgText += "<g>";
+    svgText += `${answers.shape}`;
+
+    // conditional to determine which shape the user chose
+    let shape;
+    if (answers.shape === 'Circle') {
+        let circleShape = new Circle();
+        svgText += `<circle cx="25" cy="75" r="20" fill="${answers.shapeColor}"/>`;
+    } else if (answers.shape === 'Triangle') {
+        let triangleShape = new Triangle();
+        svgText += `<polygon points="200,10 250,200 160,200" fill = ${answers.shapeColor}/>`;
+    } else (answers.shape === 'Square') {
+        let squareShape = new Sqaure();
+        svgText += `<rect x="73" y="40" width="200" height="200" fill = ${answers.shapeColor}/>`; 
+    }
+
+}
 
 // GIVEN a command - line application that accepts user input
 
@@ -60,11 +80,6 @@ function promptUser() {
         ])
         .then((answers) => {
             // make sure the user does not enter more than 3 characters for the logo
-            let shape;
-            if(answers.shape = 'Circle'){
-                let circleShape = new Shape.Circle()
-                shape = circleShape;
-            }
             if (answers.text.length > 3) {
                 console.log("Please enter a text input of no more than 3 characters.");
                 // if user enters more than 3 characters prompt again
